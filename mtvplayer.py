@@ -26,14 +26,14 @@ import mpv
 class MTVPlayer:
     def __init__(self):
         self.player = mpv.MPV()
-        self.player.fullscreen
+        self.player.fullscreen()
     
     def play(self, path):
         self.player.play(path)
         print("play function invoked")
 
     def stop(self):
-        self.player.stop
+        self.player.stop()
 
 # if __name__ == "__main__":
 #     parser = argparse.ArgumentParser(description='MTVPlayer CLI')
