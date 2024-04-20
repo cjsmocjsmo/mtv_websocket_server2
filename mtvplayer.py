@@ -24,7 +24,7 @@
 import mpv
 
 class MTVPlayer:
-    def __init__(self, path):
+    def __init__(self):
         self.player = mpv.MPV()
         self.player.fullscreen
     
