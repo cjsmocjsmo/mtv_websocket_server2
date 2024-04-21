@@ -54,7 +54,7 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
                 break
 
             
-            self.write_message(f)
+            self.write_message(str(f))
         else:
             self.write_message("Invalid command")
 
