@@ -1,6 +1,6 @@
 import os
 import time
-import subprocess
+from pathlib import Path
 import tornado.ioloop
 import tornado.websocket
 import tornado.httpserver
@@ -45,12 +45,9 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
             mtvplayer.stop()
             self.write_message("Video paused")
         elif mtvcommand == "glob":
-            globpath = path + "/*.mp4"
-            if os.path.exists(path):
-                self.write_message("Path exists")
-            else:
-                self.write_message("FUUUUUUck")
-            files = glob.glob(globpath)
+            search_path = Path(path)
+            search_pattern =  "**/*.mp4"
+            files = search_path.glob(search_pattern, follow_symlinks=True)
             self.write_message(str(files))
         else:
             self.write_message("Invalid command")
