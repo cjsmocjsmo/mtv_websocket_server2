@@ -48,6 +48,8 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
             globpath = path + "/*.mp4"
             if os.path.exists(path):
                 self.write_message("Path exists")
+            else:
+                print("FUUUUUUck")
             files = glob.glob(globpath)
             self.write_message(str(files))
         else:
