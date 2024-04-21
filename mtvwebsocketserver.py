@@ -47,7 +47,7 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
         elif mtvcommand == "glob":
             search_path = Path(path)
             search_pattern =  "**/*.mp4"
-            files = search_path.glob(search_pattern, followlinks=True)
+            files = search_path.glob(search_pattern)
             self.write_message(str(files))
         else:
             self.write_message("Invalid command")
