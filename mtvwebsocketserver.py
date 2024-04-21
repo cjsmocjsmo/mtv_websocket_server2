@@ -47,9 +47,12 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
         elif mtvcommand == "glob":
             search_path = Path(path)
             search_pattern =  "**/Zootopia*.mp4"
-            file = search_path.glob(search_pattern)
-            print(file)
-            f = str(file[0])
+            files = search_path.glob(search_pattern)
+            f = None
+            for file in files:
+                f = file
+                break
+
             
             self.write_message(f)
         else:
