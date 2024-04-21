@@ -49,7 +49,7 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
             search_pattern =  "**/Zootopia*.mp4"
             file = search_path.glob(search_pattern)
             
-            self.write_message(str(file))
+            self.write_message(str(file[0]))
         else:
             self.write_message("Invalid command")
 
