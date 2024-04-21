@@ -45,7 +45,8 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
             mtvplayer.stop()
             self.write_message("Video paused")
         elif mtvcommand == "glob":
-            files = glob.glob(path)
+            globpath = path + "/*.mp4"
+            files = glob.glob(globpath)
             self.write_message(str(files))
         else:
             self.write_message("Invalid command")
