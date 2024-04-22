@@ -31,7 +31,7 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         # mtvplayer = MTVP.MTVPlayer()
-        mtvplayer = MTVPlayer(input_ipc_server="/tmp/mpv-socket", idle=True)
+        mtvplayer = MTVPlayer()
         
         mtvcommand, path = message.split(":")
         print(path)
