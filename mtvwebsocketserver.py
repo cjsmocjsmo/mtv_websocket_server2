@@ -46,7 +46,7 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
             self.write_message("Video paused")
         elif mtvcommand == "glob":
             search_path = Path(path)
-            search_pattern =  "**/Zootopia*.mp4"
+            search_pattern =  "/*.mp4"
             files = search_path.glob(search_pattern)
             f = None
             for file in files:
