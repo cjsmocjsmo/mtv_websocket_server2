@@ -31,7 +31,7 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         # mtvplayer = MTVP.MTVPlayer()
-        mtvplayer = MTVPlayer()
+        mtvplayer = MTVPlayer(input_ipc_server="/tmp/mpv-socket", idle=True)
         
         mtvcommand, path = message.split(":")
         print(path)
@@ -50,8 +50,7 @@ class VideoHandler(tornado.websocket.WebSocketHandler):
             files = search_path.glob(search_pattern)
             f = None
             for file in files:
-                f = file
-                break
+                print(file)
 
             
             self.write_message(str(f))
@@ -105,3 +104,69 @@ if __name__ == "__main__":
 #     async with websockets.serve(handle_message, "localhost", 8765):
 #         print("WebSocket server started on port 8765!")
 #         await asyncio.Future()  # Run server indefinitely
+
+
+
+
+
+
+
+# import json
+# from gevent import monkey
+# from gevent.server import StreamServer
+
+# # Import mpv library
+# import mpv
+
+# monkey.patch_all()  # Patch standard library for asynchronous behavior
+
+
+# class MpvController:
+#     def __init__(self):
+#         self.player = mpv.MPV()
+
+#     def load(self, filename):
+#         self.player.loadfile(filename)
+#         return "Loaded file: {}".format(filename)
+
+#     def play(self):
+#         self.player.play()
+#         return "Playing"
+
+#     def stop(self):
+#         self.player.pause()
+#         return "Stopped"
+
+
+# def handle_request(socket, address):
+#     # Receive data from client
+#     data = socket.recv(1024).decode()
+
+#     # Parse data (assuming simple JSON format)
+#     try:
+#         request = json.loads(data)
+#         method = request["method"]
+#         params = request.get("params", [])
+#     except json.JSONDecodeError:
+#         response = {"error": "Invalid JSON format"}
+#     else:
+#         # Call corresponding method from MpvController
+#         if method == "load":
+#             response = {"result": controller.load(params[0])}
+#         elif method == "play":
+#             response = {"result": controller.play()}
+#         elif method == "stop":
+#             response = {"result": controller.stop()}
+#         else:
+#             response = {"error": "Unknown method"}
+
+#     # Send response back to client
+#     socket.sendall(json.dumps(response).encode())
+#     socket.close()
+
+
+# if __name__ == "__main__":
+#     controller = MpvController()
+#     server = StreamServer(("localhost", 8000), handle_request)
+#     print("Mpv RPC server listening on port 8000")
+#     server.serve_forever()
