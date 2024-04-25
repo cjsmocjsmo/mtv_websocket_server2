@@ -124,9 +124,9 @@ monkey.patch_all()  # Patch standard library for asynchronous behavior
 class MpvController:
     def __init__(self):
         self.player = mpv.MPV()
-        self.player.fullscreen = True
 
     def load(self, filename):
+        self.player.fullscreen = True
         self.player.loadfile(filename)
         return "Loaded file: {}".format(filename)
 
@@ -167,7 +167,9 @@ def handle_request(socket, address):
 
 
 if __name__ == "__main__":
+    print("starting controller")
     controller = MpvController()
+    print("controller started")
     server = StreamServer(("192.168.0.97", 8000), handle_request)
     print("Mpv RPC server listening on port 8000")
     server.serve_forever()
