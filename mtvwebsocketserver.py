@@ -168,6 +168,6 @@ def handle_request(socket, address):
 
 if __name__ == "__main__":
     controller = MpvController()
-    server = StreamServer(("localhost", 8000), handle_request)
+    server = StreamServer(("192.168.0.97", 8000), handle_request)
     print("Mpv RPC server listening on port 8000")
     server.serve_forever()
